@@ -5,6 +5,9 @@
  * 1. Introduction to Java helpful.
  */
 
+import java.util.ArrayList;
+
+
 public abstract class Bag {
     /*
      * TODO: Create the following private instance variables
@@ -13,6 +16,11 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
+
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private ArrayList<String> contents;
 
 
 
@@ -27,6 +35,14 @@ public abstract class Bag {
      * its contents.)
      */
 
+    public Bag( String color, int capacity){
+
+        this.color = color;
+        this.capacity = capacity;
+        this.numberOfContents = 0;
+        this.contents = new ArrayList<>(this.capacity);
+    }
+
 
 
 
@@ -38,6 +54,18 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    public String getColor(){
+        return this.color;
+    }
+
+    public int getNumberOfContents(){
+        return this.numberOfContents;
+    }
+
+    public int getCapacity(){
+        return this.capacity;
+    }
+
 
 
 
@@ -45,6 +73,8 @@ public abstract class Bag {
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
+
+    public void setColor(String bagColor){this.color = bagColor;}
 
 
 
@@ -61,6 +91,15 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
+    public boolean addItem(String item){
+        if (this.numberOfContents < this.capacity){
+            this.contents.add(item);
+            this.numberOfContents += 1;
+            return true;
+        }
+
+        return false;
+    }
 
 
 
@@ -73,8 +112,18 @@ public abstract class Bag {
      *
      * If there are no items in this Bag, return null.
      *
-     * @return
+     * @return String or null
      */
+
+    public String popItem(){
+        if (this.numberOfContents > 0){
+            this.numberOfContents -= 1;
+            String x = this.contents.get(this.numberOfContents);
+            this.contents.remove(x);
+            return x;
+        }
+        return null;
+    }
 
 
 
@@ -87,6 +136,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
+        this.capacity += n;
 
     }
 
@@ -95,7 +145,7 @@ public abstract class Bag {
      * This method requires you to have created the private
      * instance variables mentioned above.
      *
-     * @return
+     * @return String
      */
     @Override
     public String toString() {
